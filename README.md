@@ -18,6 +18,10 @@ For debian-like linux distros, this should be enough to prepare for building:
 apt install gcc libsodium-dev make autoconf
 ```
 
+#### MacOS
+
+For MacOS systems you will need to install `libsodium` and also have a sane build environment (`xcode-select --install` as well as `homebrew`). Install libsodium using homebrew and then link the files for building (see below).
+
 ### Building
 
 `./autogen.sh` to generate configure script, if it's not there already.
@@ -28,6 +32,13 @@ apt install gcc libsodium-dev make autoconf
 On AMD64 platforms, you probably also want to pass something like
 `--enable-amd64-51-30k`  to configure script for faster key generation;
 run `./configure --help` to see all available options.
+
+On MacOS platforms perform the following (adjust for the version you have installed via homebrew)
+```
+export LDFLAGS="-I/usr/local/Homebrew/Cellar/libsodium/1.0.18_1/include -L/usr/local/Homebrew/Cellar/libsodium/1.0.18_1/lib"
+export CFLAGS="-I/usr/local/Homebrew/Cellar/libsodium/1.0.18_1/include"
+./configure
+```
 
 Finally, `make` to start building (`gmake` in \*BSD platforms).
 
